@@ -1,0 +1,43 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.4.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+plugins {
+	id 'info.solidsoft.pitest' version '1.3.0'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'io.weather'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+
+	compileOnly('org.projectlombok:lombok')
+
+	compile("io.springfox:springfox-swagger2:2.4.0")
+	compile 'io.springfox:springfox-swagger-ui:2.4.0'
+
+	testCompile group: 'com.google.guava', name: 'guava', version: '26.0-jre'
+	testCompile group: 'org.mockito', name: 'mockito-all', version: '1.9.5'
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+build.dependsOn 'pitest'
