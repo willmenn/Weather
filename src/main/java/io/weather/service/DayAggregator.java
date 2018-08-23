@@ -31,9 +31,9 @@ public class DayAggregator {
     private Day createDay(Main main, LocalDateTime time, LocalDateTime time6, LocalDateTime time18) {
         Day dayWithWeather = null;
         if (isDailyHour(time, time6, time18)) {
-            dayWithWeather = new Day(main.getTemp(), 0.0, main.getPressure(), time.toLocalDate());
+            dayWithWeather = new Day(main.getTemp(), null, main.getPressure(), time.toLocalDate());
         } else if (isNightlyHour(time, time6, time18)) {
-            dayWithWeather = new Day(0.0, main.getTemp(), main.getPressure(), time.toLocalDate());
+            dayWithWeather = new Day(null, main.getTemp(), main.getPressure(), time.toLocalDate());
         }
 
         return dayWithWeather;
